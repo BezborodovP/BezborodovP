@@ -56,10 +56,10 @@ jobs:
 
         if [ "${{ matrix.versions.CONTEXT }}" != "alpine" ]
         then
-          # helloworld
-          docker buildx build --tag wiremock-hello --load samples/hello
-          docker container run -d --name test -p 8080:8080 wiremock-hello
-          timeout 10 bash -c 'while ! curl --fail http://localhost:8080/hello; do sleep 1; done'
+          # test
+          docker buildx build --tag wiremock-test --load samples/test
+          docker container run -d --name test -p 8080:8080 wiremock-test
+          timeout 10 bash -c 'while ! curl --fail http://localhost:8080/test; do sleep 1; done'
           docker container rm -f test
 
           # random
